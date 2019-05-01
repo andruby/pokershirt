@@ -12,7 +12,10 @@ config :pokershirt, PokershirtWeb.Endpoint,
   url: [host: "localhost"],
   secret_key_base: "6iZNGffWWbVPn4UG1Pjf8l1Nqw1DirWJ3fAk4R74fnTfjeuoAcvIxED21UrPoadn",
   render_errors: [view: PokershirtWeb.ErrorView, accepts: ~w(html json)],
-  pubsub: [name: Pokershirt.PubSub, adapter: Phoenix.PubSub.PG2]
+  pubsub: [name: Pokershirt.PubSub, adapter: Phoenix.PubSub.PG2],
+  live_view: [
+    signing_salt: "w8qgqb5D3kgfR8wV1mSyeEJcvP/FOKfW"
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,
