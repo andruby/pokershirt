@@ -1,5 +1,17 @@
 Room: <%= @room_id %>
 
+<form phx-change="username_change" action="index.html" method="post">
+  <div class="field">
+    <div class="control">
+      <input name="username" class="input" type="text" placeholder="Your name" value="<%= @username %>">
+    </div>
+  </div>
+</form>
+
+<div class="">
+  Your username: <%= @username %>
+</div>
+
 <div>
   <h1 phx-click="boom">The count is: <%= @val %></h1>
   <button phx-click="boom" class="alert-danger">BOOM</button>

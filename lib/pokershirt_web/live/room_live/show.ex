@@ -12,7 +12,12 @@ defmodule PokershirtWeb.RoomLive.Show do
     socket2 = socket
     |> assign(:room_id, session.room_id)
     |> assign(:val, 0)
+    |> assign(:username, nil)
     {:ok, socket2}
+  end
+
+  def handle_event("username_change", %{"username" => username}, socket) do
+    {:noreply, assign(socket, :username, username)}
   end
 
   def handle_event("inc", _, socket) do
