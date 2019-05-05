@@ -12,9 +12,8 @@ defmodule PokershirtWeb.RoomController do
 
   defp ensure_session_uuid(conn, _) do
     case get_session(conn, :uuid) do
-      # TODO: Must be secure uuid
-      nil -> put_session(conn, :uuid, "lool")
-      uuid -> conn
+      nil -> put_session(conn, :uuid, Ecto.UUID.generate())
+      _uuid -> conn
     end
   end
 end
