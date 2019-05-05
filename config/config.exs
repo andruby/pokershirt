@@ -7,6 +7,9 @@
 # General application configuration
 use Mix.Config
 
+config :pokershirt,
+  ecto_repos: [Pokershirt.Repo]
+
 # Configures the endpoint
 config :pokershirt, PokershirtWeb.Endpoint,
   url: [host: "localhost"],
