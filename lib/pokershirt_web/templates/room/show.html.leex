@@ -18,3 +18,21 @@ Room: <%= @room_id %>
   <button phx-click="dec">-</button>
   <button phx-click="inc">+</button>
 </div>
+
+<div class="">
+  <h2>Users online</h2>
+  <ul>
+    <%= for {uuid, %{metas: [metas]}} <- @online_users do %>
+      <li>
+        <%= if metas[:username] do %>
+          <%= metas[:username] %>
+        <% else %>
+          <i>anonymous</i>
+        <% end %>
+        <%= if uuid == @user_uid do %>
+          <b>(you)</b>
+        <% end %>
+      </li>
+    <% end %>
+  </ul>
+</div>
