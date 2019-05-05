@@ -8,8 +8,6 @@ defmodule PokershirtWeb.RoomLive.Show do
   end
 
   def mount(session, socket0) do
-    if connected?(socket0), do: :timer.send_interval(1000, self(), :timer_tick)
-
     socket = socket0
     |> assign(:room_id, session.room_id)
     |> assign(:user_uid, session.user_uid)
@@ -31,19 +29,7 @@ defmodule PokershirtWeb.RoomLive.Show do
     {:noreply, assign(socket, :username, username)}
   end
 
-  def handle_event("inc", _, socket) do
-    {:noreply, update(socket, :val, &(&1 + 1))}
-  end
-
-  def handle_event("dec", _, socket) do
-    {:noreply, update(socket, :val, &(&1 - 1))}
-  end
-
   def handle_info(%Broadcast{event: "presence_diff"}, socket) do
     {:noreply, fetch(socket)}
-  end
-
-  def handle_info(:timer_tick, socket) do
-    {:noreply, update(socket, :val, &(&1 + 1))}
   end
 end

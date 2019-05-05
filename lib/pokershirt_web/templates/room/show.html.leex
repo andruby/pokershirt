@@ -9,17 +9,6 @@ Room: <%= @room_id %>
 </form>
 
 <div class="">
-  Your username: <%= @username %>
-</div>
-
-<div>
-  <h1 phx-click="boom">The count is: <%= @val %></h1>
-  <button phx-click="boom" class="alert-danger">BOOM</button>
-  <button phx-click="dec">-</button>
-  <button phx-click="inc">+</button>
-</div>
-
-<div class="">
   <h2>Users online</h2>
   <ul>
     <%= for {uuid, %{metas: [metas]}} <- @online_users do %>
