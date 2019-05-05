@@ -1,10 +1,10 @@
-defmodule PokershirtWeb.RoomLive.Show do
+defmodule PokershirtWeb.RoomLive do
   use Phoenix.LiveView
   alias PokershirtWeb.{RoomView, Presence}
   alias Phoenix.Socket.Broadcast
 
   def render(assigns) do
-    RoomView.render("show.html", assigns)
+    RoomView.render("room_live.html", assigns)
   end
 
   def mount(session, socket0) do
