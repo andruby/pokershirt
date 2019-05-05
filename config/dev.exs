@@ -2,8 +2,7 @@ use Mix.Config
 
 # Configure your database
 config :pokershirt, Pokershirt.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: System.get_env["USER"],
   database: "pokershirt_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
