@@ -11,9 +11,10 @@ defmodule Pokershirt.Application do
       # Start the Ecto repository
       Pokershirt.Repo,
       # Start the endpoint when the application starts
-      PokershirtWeb.Endpoint
+      PokershirtWeb.Endpoint,
       # Starts a worker by calling: Pokershirt.Worker.start_link(arg)
       # {Pokershirt.Worker, arg},
+      PokershirtWeb.Presence
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
