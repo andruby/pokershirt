@@ -21,10 +21,13 @@ defmodule PokershirtWeb.RoomLive do
   defp fetch(socket) do
     list = Presence.list("room:#{socket.assigns[:room_id]}:presence")
     {_, %{metas: [our_metas]}} = Enum.find(list, fn ({uuid, _}) -> uuid == socket.assigns[:user_uid] end)
+    all_cast = Enum.all?(list, fn ({_, %{metas: [metas]}}) -> metas[:vote] end)
+
     socket
     |> assign(:online_users, list)
     |> assign(:username, our_metas[:username])
     |> assign(:vote, our_metas[:vote])
+    |> assign(:all_cast, all_cast)
   end
 
   def handle_event("username_change", %{"username" => username}, socket) do

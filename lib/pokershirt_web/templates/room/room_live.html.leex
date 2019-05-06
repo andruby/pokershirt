@@ -83,7 +83,15 @@
             <% end %>
           </p>
           <p class="title">
-            <span class="tag is-large is-white"><%= metas[:vote] %></span>
+            <%= if metas[:vote] do %>
+              <span class="tag is-large is-white">
+                <%= if @all_cast do %>
+                <%= metas[:vote] %>
+                <% else %>
+                _
+                <% end %>
+              </span>
+            <% end %>
           </p>
         </div>
       </div>
