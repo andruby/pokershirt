@@ -36,7 +36,9 @@ defmodule PokershirtWeb.RoomLive do
   end
 
   def handle_event("vote", value, socket) do
-    Presence.update(self(), "room:#{socket.assigns[:room_id]}:presence", socket.assigns[:user_uid], &(Map.put(&1, :vote, value)))
+    unless socket.assigns[:all_cast] do
+      Presence.update(self(), "room:#{socket.assigns[:room_id]}:presence", socket.assigns[:user_uid], &(Map.put(&1, :vote, value)))
+    end
     {:noreply, socket}
   end
 

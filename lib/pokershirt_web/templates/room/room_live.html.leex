@@ -35,22 +35,22 @@
     <div class="">
       <div class="field has-addons">
         <p class="control">
-          <a class="button <%= if @vote == "S" do %>is-primary<% end %>" phx-click="vote" phx-value="S">
+          <a class="button <%= if @vote == "S" do %>is-primary<% end %>" <%= if @all_cast do %>disabled<% end %> phx-click="vote" phx-value="S">
             <strong>S</strong>mall
           </a>
         </p>
         <p class="control">
-          <a class="button <%= if @vote == "M" do %>is-primary<% end %>" phx-click="vote" phx-value="M">
+          <a class="button <%= if @vote == "M" do %>is-primary<% end %>" <%= if @all_cast do %>disabled<% end %> phx-click="vote" phx-value="M">
             <strong>M</strong>edium
           </a>
         </p>
         <p class="control">
-          <a class="button <%= if @vote == "L" do %>is-primary<% end %>" phx-click="vote" phx-value="L">
+          <a class="button <%= if @vote == "L" do %>is-primary<% end %>" <%= if @all_cast do %>disabled<% end %> phx-click="vote" phx-value="L">
             <strong>L</strong>arge
           </a>
         </p>
         <p class="control">
-          <a class="button <%= if @vote == "XL" do %>is-primary<% end %>" phx-click="vote" phx-value="XL">
+          <a class="button <%= if @vote == "XL" do %>is-primary<% end %>" <%= if @all_cast do %>disabled<% end %> phx-click="vote" phx-value="XL">
             <strong>XL</strong>arge
           </a>
         </p>
