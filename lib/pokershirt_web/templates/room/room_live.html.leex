@@ -86,11 +86,13 @@
             <%= if metas[:vote] do %>
               <span class="tag is-large is-white">
                 <%= if @all_cast do %>
-                <%= metas[:vote] %>
+                  <%= metas[:vote] %>
                 <% else %>
-                _
+                  _
                 <% end %>
               </span>
+            <% else %>
+              <span>&nbsp;</span>
             <% end %>
           </p>
         </div>
