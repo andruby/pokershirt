@@ -11,34 +11,45 @@ defmodule PokershirtWeb.RoomLive do
     socket = socket0
     |> assign(:room_id, session.room_id)
     |> assign(:user_uid, session.user_uid)
-    |> assign(:val, 0)
-    |> assign(:username, nil)
-    |> assign(:vote, nil)
 
-    Phoenix.PubSub.subscribe(Pokershirt.PubSub, "room:#{socket.assigns[:room_id]}")
-    Presence.track(self(), "room:#{socket.assigns[:room_id]}", socket.assigns[:user_uid], %{})
+    Phoenix.PubSub.subscribe(Pokershirt.PubSub, "room:#{socket.assigns[:room_id]}:presence")
+    Phoenix.PubSub.subscribe(Pokershirt.PubSub, "room:#{socket.assigns[:room_id]}:rounds")
+    Presence.track(self(), "room:#{socket.assigns[:room_id]}:presence", socket.assigns[:user_uid], %{})
     {:ok, fetch(socket)}
   end
 
   defp fetch(socket) do
-    list = Presence.list("room:#{socket.assigns[:room_id]}")
-    assign(socket, :online_users, list)
+    list = Presence.list("room:#{socket.assigns[:room_id]}:presence")
+    {_, %{metas: [our_metas]}} = Enum.find(list, fn ({uuid, _}) -> uuid == socket.assigns[:user_uid] end)
+    socket
+    |> assign(:online_users, list)
+    |> assign(:username, our_metas[:username])
+    |> assign(:vote, our_metas[:vote])
   end
 
   def handle_event("username_change", %{"username" => username}, socket) do
-    Presence.update(self(), "room:#{socket.assigns[:room_id]}", socket.assigns[:user_uid], %{username: username})
-    {:noreply, assign(socket, :username, username)}
+    Presence.update(self(), "room:#{socket.assigns[:room_id]}:presence", socket.assigns[:user_uid], &(Map.put(&1, :username, username)))
+    {:noreply, socket}
   end
 
   def handle_event("vote", value, socket) do
-    {:noreply, assign(socket, :vote, value)}
+    Presence.update(self(), "room:#{socket.assigns[:room_id]}:presence", socket.assigns[:user_uid], &(Map.put(&1, :vote, value)))
+    {:noreply, socket}
   end
 
   def handle_event("new_round", _, socket) do
+    # Notify all LiveViews to reset their votes
+    Phoenix.PubSub.broadcast(Pokershirt.PubSub, "room:#{socket.assigns[:room_id]}:rounds", "new_round")
     {:noreply, socket}
   end
 
   def handle_info(%Broadcast{event: "presence_diff"}, socket) do
     {:noreply, fetch(socket)}
+  end
+
+  def handle_info("new_round", socket) do
+    # Reset our user's vote
+    Presence.update(self(), "room:#{socket.assigns[:room_id]}:presence", socket.assigns[:user_uid], &(Map.put(&1, :vote, nil)))
+    {:noreply, socket}
   end
 end
