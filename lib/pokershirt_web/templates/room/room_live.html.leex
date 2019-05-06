@@ -1,27 +1,90 @@
-Room: <%= @room_id %>
+<div class="columns is-mobile">
+  <div class="column is-two-thirds">
+    <h1 class="title">
+      PokerShirt
+    </h1>
+    <p class="subtitle">
+      Planning poker with T-shirt sizes!
+    </p>
+  </div>
+  <div class="column is-one-thirds has-text-right">
+    <h1 class="title">
+      Room
+    </h1>
+    <p class="subtitle">
+      <em><%= @room_id %></em>
+    </p>
+  </div>
+</div>
 
-<form phx-change="username_change" action="index.html" method="post">
-  <div class="field">
-    <div class="control">
-      <input name="username" class="input" type="text" placeholder="Your name" value="<%= @username %>">
+<div class="columns is-mobile">
+  <div class="column is-one-third">
+    <form phx-change="username_change" action="index.html" method="post">
+      <div class="field">
+        <label class="label">Your username</label>
+        <div class="control">
+          <input name="username" class="input" type="text" placeholder="Chubaka" value="<%= @username %>">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="column">
+    <label class="label">Your vote</label>
+    <div class="">
+      <div class="field has-addons">
+        <p class="control">
+          <a class="button">
+            <strong>S</strong>mall
+          </a>
+        </p>
+        <p class="control">
+          <a class="button is-primary">
+            <strong>M</strong>edium
+          </a>
+        </p>
+        <p class="control">
+          <a class="button">
+            <strong>L</strong>arge
+          </a>
+        </p>
+        <p class="control">
+          <a class="button">
+            <strong>XL</strong>arge
+          </a>
+        </p>
+
+      </div>
     </div>
   </div>
-</form>
+  <div class="column is-one-quarter has-text-right">
+    <label class="label">&nbsp;</label>
+    <a class="button">
+      New Round
+    </a>
+  </div>
+</div>
 
 <div class="">
-  <h2>Users online</h2>
-  <ul>
+  <label class="label">Players</label>
+  <div class="level is-mobile">
     <%= for {uuid, %{metas: [metas]}} <- @online_users do %>
-      <li>
-        <%= if metas[:username] do %>
-          <%= metas[:username] %>
-        <% else %>
-          <i>anonymous</i>
-        <% end %>
-        <%= if uuid == @user_uid do %>
-          <b>(you)</b>
-        <% end %>
-      </li>
+    <div class="level-item has-text-centered">
+      <div>
+        <p class="heading">
+          <%= if metas[:username] do %>
+            <%= metas[:username] %>
+          <% else %>
+            <i>anonymous</i>
+          <% end %>
+          <%= if uuid == @user_uid do %>
+            <b>(you)</b>
+          <% end %>
+        </p>
+        <p class="title">
+          <span class="tag is-large is-light">S</span>
+        </p>
+      </div>
+    </div>
     <% end %>
-  </ul>
+  </div>
 </div>

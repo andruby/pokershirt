@@ -1,1 +1,8 @@
+<h1 class="title">
+  PokerShirt
+</h1>
+<p class="subtitle">
+  Planning poker with T-shirt sizes!
+</p>
+
 <a class="button is-primary" href="/r/<%= @new_room_id %>">New Room</a>
