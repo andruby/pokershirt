@@ -17,6 +17,8 @@
   </div>
 </div>
 
+<div>&nbsp;</div>
+
 <div class="columns is-mobile">
   <div class="column is-one-third">
     <form phx-change="username_change" action="index.html" method="post">
@@ -33,22 +35,22 @@
     <div class="">
       <div class="field has-addons">
         <p class="control">
-          <a class="button">
+          <a class="button <%= if @vote == "s" do %>is-primary<% end %>" phx-click="vote" phx-value="s">
             <strong>S</strong>mall
           </a>
         </p>
         <p class="control">
-          <a class="button is-primary">
+          <a class="button <%= if @vote == "m" do %>is-primary<% end %>" phx-click="vote" phx-value="m">
             <strong>M</strong>edium
           </a>
         </p>
         <p class="control">
-          <a class="button">
+          <a class="button <%= if @vote == "l" do %>is-primary<% end %>" phx-click="vote" phx-value="l">
             <strong>L</strong>arge
           </a>
         </p>
         <p class="control">
-          <a class="button">
+          <a class="button <%= if @vote == "xl" do %>is-primary<% end %>" phx-click="vote" phx-value="xl">
             <strong>XL</strong>arge
           </a>
         </p>
@@ -58,33 +60,34 @@
   </div>
   <div class="column is-one-quarter has-text-right">
     <label class="label">&nbsp;</label>
-    <a class="button">
-      New Round
+    <a class="button" phx-click="new_round">
+      <strong>N</strong>ew Round
     </a>
   </div>
 </div>
 
-<div class="">
-  <label class="label">Players</label>
-  <div class="level is-mobile">
-    <%= for {uuid, %{metas: [metas]}} <- @online_users do %>
-    <div class="level-item has-text-centered">
-      <div>
-        <p class="heading">
-          <%= if metas[:username] do %>
-            <%= metas[:username] %>
-          <% else %>
-            <i>anonymous</i>
-          <% end %>
-          <%= if uuid == @user_uid do %>
-            <b>(you)</b>
-          <% end %>
-        </p>
-        <p class="title">
-          <span class="tag is-large is-light">S</span>
-        </p>
+<div class="hero is-warning">
+  <div class="hero-body">
+    <div class="level is-mobile">
+      <%= for {uuid, %{metas: [metas]}} <- @online_users do %>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">
+            <%= if metas[:username] do %>
+              <%= metas[:username] %>
+            <% else %>
+              <i>anonymous</i>
+            <% end %>
+            <%= if uuid == @user_uid do %>
+              <b>(*)</b>
+            <% end %>
+          </p>
+          <p class="title">
+            <span class="tag is-large is-white">S</span>
+          </p>
+        </div>
       </div>
+      <% end %>
     </div>
-    <% end %>
   </div>
 </div>

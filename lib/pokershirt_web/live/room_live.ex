@@ -13,6 +13,7 @@ defmodule PokershirtWeb.RoomLive do
     |> assign(:user_uid, session.user_uid)
     |> assign(:val, 0)
     |> assign(:username, nil)
+    |> assign(:vote, nil)
 
     Phoenix.PubSub.subscribe(Pokershirt.PubSub, "room:#{socket.assigns[:room_id]}")
     Presence.track(self(), "room:#{socket.assigns[:room_id]}", socket.assigns[:user_uid], %{})
@@ -27,6 +28,14 @@ defmodule PokershirtWeb.RoomLive do
   def handle_event("username_change", %{"username" => username}, socket) do
     Presence.update(self(), "room:#{socket.assigns[:room_id]}", socket.assigns[:user_uid], %{username: username})
     {:noreply, assign(socket, :username, username)}
+  end
+
+  def handle_event("vote", value, socket) do
+    {:noreply, assign(socket, :vote, value)}
+  end
+
+  def handle_event("new_round", _, socket) do
+    {:noreply, socket}
   end
 
   def handle_info(%Broadcast{event: "presence_diff"}, socket) do
