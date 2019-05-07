@@ -35,6 +35,11 @@
     <div class="">
       <div class="field has-addons">
         <p class="control">
+          <a class="button <%= if @vote == "?" do %>is-primary<% end %>" <%= if @all_cast do %>disabled<% end %> phx-click="vote" phx-value="?">
+            <strong>?</strong>
+          </a>
+        </p>
+        <p class="control">
           <a class="button <%= if @vote == "S" do %>is-primary<% end %>" <%= if @all_cast do %>disabled<% end %> phx-click="vote" phx-value="S">
             <strong>S</strong>mall
           </a>
