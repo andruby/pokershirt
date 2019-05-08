@@ -38,14 +38,14 @@ defmodule PokershirtWeb.RoomLive do
 
   def handle_event("vote", value, socket) do
     unless socket.assigns[:all_cast] do
-      Pokershirt.Metric.increment(Repo, :total_votes)
+      Task.start(fn -> Pokershirt.Metric.increment(Repo, :total_votes) end)
       Presence.update(self(), "room:#{socket.assigns[:room_id]}:presence", socket.assigns[:user_uid], &(Map.put(&1, :vote, value)))
     end
     {:noreply, socket}
   end
 
   def handle_event("new_round", _, socket) do
-    Pokershirt.Metric.increment(Repo, :total_rounds)
+    Task.start(fn -> Pokershirt.Metric.increment(Repo, :total_rounds) end)
     # Notify all LiveViews to reset their votes
     Phoenix.PubSub.broadcast(Pokershirt.PubSub, "room:#{socket.assigns[:room_id]}:rounds", "new_round")
     {:noreply, socket}
