@@ -1,8 +1,21 @@
-<h1 class="title">
-  PokerShirt
-</h1>
-<p class="subtitle">
-  Planning poker with T-shirt sizes!
-</p>
+<div class="has-text-centered" style="margin-top: 40px">
+  <h1 class="title">
+    PokerShirt
+  </h1>
+  <p class="subtitle">
+    Planning poker with T-shirt sizes!
+  </p>
 
-<a class="button is-primary" href="/r/<%= @new_room_id %>">New Room</a>
+  <a class="button is-warning is-large" style="margin-top: 10px" href="/r/<%= @new_room_id %>">New Room</a>
+</div>
+
+<div class="has-text-centered" style="margin-top: 40px">
+  <div>
+    <p class="is-size-4">55</p>
+    <p class="heading">rounds played</p>
+  </div>
+  <div style="padding-top: 20px">
+    <p class="is-size-4">203</p>
+    <p class="heading">votes cast</p>
+  </div>
+</div>
