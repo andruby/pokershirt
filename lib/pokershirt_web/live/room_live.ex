@@ -2,6 +2,7 @@ defmodule PokershirtWeb.RoomLive do
   use Phoenix.LiveView
   alias PokershirtWeb.{RoomView, Presence}
   alias Phoenix.Socket.Broadcast
+  alias Pokershirt.Repo
 
   def render(assigns) do
     RoomView.render("room_live.html", assigns)
@@ -37,12 +38,14 @@ defmodule PokershirtWeb.RoomLive do
 
   def handle_event("vote", value, socket) do
     unless socket.assigns[:all_cast] do
+      Pokershirt.Metric.increment(Repo, :total_votes)
       Presence.update(self(), "room:#{socket.assigns[:room_id]}:presence", socket.assigns[:user_uid], &(Map.put(&1, :vote, value)))
     end
     {:noreply, socket}
   end
 
   def handle_event("new_round", _, socket) do
+    Pokershirt.Metric.increment(Repo, :total_rounds)
     # Notify all LiveViews to reset their votes
     Phoenix.PubSub.broadcast(Pokershirt.PubSub, "room:#{socket.assigns[:room_id]}:rounds", "new_round")
     {:noreply, socket}
