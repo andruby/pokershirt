@@ -27,6 +27,7 @@ defmodule Pokershirt.Metric do
   end
 
   def get(repo, key) when is_atom(key) do
-    repo.get_by(Metric, key: to_string(key)).int_value
+    record = repo.get_by(Metric, key: to_string(key))
+    if record, do: record.int_value, else: 0
   end
 end
