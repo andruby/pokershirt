@@ -11,7 +11,7 @@ use Mix.Config
 # before starting your production server.
 config :pokershirt, PokershirtWeb.Endpoint,
   url: [host: "poker-shirt.gigalixirapp.com", port: 443],
-  check_origin: ["https://poker-shirt.gigalixirapp.com", "https://pokershirt.io"],
+  check_origin: ["https://poker-shirt.gigalixirapp.com", "https://pokershirt.io", "https://planningpoker.live"],
   cache_static_manifest: "priv/static/cache_manifest.json"
 
 # Do not print debug messages in production
