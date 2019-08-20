@@ -41,6 +41,11 @@
           </a>
         </p>
         <p class="control">
+          <a class="button <%= if @vote == "XS" do %>is-primary<% end %>" <%= if @all_cast do %>disabled<% end %> phx-click="vote" phx-value="XS">
+            <strong>XS</strong>mall
+          </a>
+        </p>
+        <p class="control">
           <a class="button <%= if @vote == "S" do %>is-primary<% end %>" <%= if @all_cast do %>disabled<% end %> phx-click="vote" phx-value="S">
             <strong>S</strong>mall
           </a>
