@@ -18,5 +18,15 @@ import "phoenix_html"
 
 import LiveSocket from "phoenix_live_view"
 
-let liveSocket = new LiveSocket("/live")
+// Thx Chris https://elixir-lang.slack.com/archives/CD594E0UU/p1566845452216100
+let Hooks = {}
+Hooks.UsernameCookie = {
+  setUsernameCookie(val){
+    document.cookie = `pokershirt_username=${encodeURIComponent(val)};path=/;max-age=31536000`
+  },
+  mounted(){ this.setUsernameCookie(this.el.value) },
+  updated(){ this.setUsernameCookie(this.el.value) }
+}
+
+let liveSocket = new LiveSocket("/live", {hooks: Hooks})
 liveSocket.connect()

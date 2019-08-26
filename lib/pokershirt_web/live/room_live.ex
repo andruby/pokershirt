@@ -12,10 +12,11 @@ defmodule PokershirtWeb.RoomLive do
     socket = socket0
     |> assign(:room_id, session.room_id)
     |> assign(:user_uid, session.user_uid)
+    |> assign(:username, session.username)
 
     Phoenix.PubSub.subscribe(Pokershirt.PubSub, "room:#{socket.assigns[:room_id]}:presence")
     Phoenix.PubSub.subscribe(Pokershirt.PubSub, "room:#{socket.assigns[:room_id]}:rounds")
-    Presence.track(self(), "room:#{socket.assigns[:room_id]}:presence", socket.assigns[:user_uid], %{})
+    Presence.track(self(), "room:#{socket.assigns[:room_id]}:presence", socket.assigns[:user_uid], %{username: socket.assigns[:username]})
     {:ok, fetch(socket)}
   end
 
