@@ -5,7 +5,7 @@ defmodule PokershirtWeb.RoomController do
   plug :ensure_session_user_uid
 
   def show(conn, %{"id" => room_id}) do
-    cookie_username = URI.decode(conn.req_cookies["pokershirt_username"])
+    cookie_username = conn.req_cookies["pokershirt_username"] |> to_string |> URI.decode
     live_render(conn, PokershirtWeb.RoomLive, session: %{room_id: room_id, user_uid: get_session(conn, :user_uid), username: cookie_username})
   end
 
