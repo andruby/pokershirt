@@ -1,5 +1,13 @@
 # Pokershirt
 
+A realtime poker planning webapp for remote teams.
+
+# Development
+
+This branch is a rewrite in Phoenix 1.6. You can find the older 2019 version in branch `phoenix-1.4`.
+
+Pokershirt uses the Phoenix framework with LiveView and presence channels.
+
 To start your Phoenix server:
 
   * Install dependencies with `mix deps.get`
