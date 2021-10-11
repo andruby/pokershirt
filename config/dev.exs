@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :pokershirt, Pokershirt.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "pokershirt",
+  password: "pokershirt",
   database: "pokershirt_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
