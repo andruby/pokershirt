@@ -47,4 +47,8 @@ defmodule PokershirtWeb.Endpoint do
   plug Plug.Head
   plug Plug.Session, @session_options
   plug PokershirtWeb.Router
+
+  socket "/socket", PokershirtWeb.UserSocket,
+    websocket: true,
+    longpoll: false
 end

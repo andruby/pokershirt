@@ -15,9 +15,10 @@ defmodule Pokershirt.Application do
       # Start the PubSub system
       {Phoenix.PubSub, name: Pokershirt.PubSub},
       # Start the Endpoint (http/https)
-      PokershirtWeb.Endpoint
+      PokershirtWeb.Endpoint,
       # Start a worker by calling: Pokershirt.Worker.start_link(arg)
       # {Pokershirt.Worker, arg}
+      PokershirtWeb.Presence
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
