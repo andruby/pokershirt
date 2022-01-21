@@ -18,6 +18,7 @@ defmodule PokershirtWeb.Router do
     pipe_through :browser
 
     live "/", LandingLive.Index, :index
+    live "/r/:room_id", RoomLive.Show, :show
   end
 
   # Other scopes may use custom stacks.

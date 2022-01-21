@@ -1,0 +1,90 @@
+<div class="columns is-mobile">
+  <div class="column is-half">
+    <h1 class="title">
+      PokerShirt
+    </h1>
+    <p class="subtitle">
+      Planning poker with T-shirt sizes!
+    </p>
+  </div>
+  <div class="column is-half has-text-right">
+    <h1 class="title">
+      Room
+    </h1>
+    <p class="subtitle">
+      Share this link:
+      <a href={"/r/#{@room_id}"}><%= @room_id %></a>
+    </p>
+  </div>
+</div>
+
+<div>&nbsp;</div>
+
+<div class="columns is-mobile">
+  <div class="column is-one-quarter">
+    <form phx-change="username_change" method="get" action="javascript:void()">
+      <div class="field">
+        <label class="label">Your username</label>
+        <div class="control">
+          <input name="username" class="input" type="text" placeholder="Chubaka" value={@username} phx-hook="UsernameCookie">
+        </div>
+      </div>
+    </form>
+  </div>
+  <div class="column">
+    <label class="label">Your vote</label>
+    <div class="">
+      <div class="field has-addons">
+        <%= for {value, label} <- @size_options do %>
+        <p class="control">
+          <a class={"button #{if @vote["size"] == value, do: 'is-primary'}"} disabled={@all_cast} phx-click="vote" phx-value-size={value}>
+            <%= raw label %>
+          </a>
+        </p>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  <div class="column is-one-quarter has-text-right">
+    <label class="label">&nbsp;</label>
+    <a class="button" phx-click="new_round">
+      <strong>N</strong>ew Round
+    </a>
+  </div>
+</div>
+
+<div class="hero is-warning">
+  <div class="hero-body">
+    <div class="level is-mobile">
+      <%= for {uuid, %{metas: [metas]}} <- @online_users do %>
+      <div class="level-item has-text-centered">
+        <div>
+          <p class="heading">
+            <%= if metas[:username] do %>
+              <%= metas[:username] %>
+            <% else %>
+              <i>anonymous</i>
+            <% end %>
+            <%= if uuid == @user_uid do %>
+              <b>(*)</b>
+            <% end %>
+          </p>
+          <p class="title">
+            <%= if metas[:vote] do %>
+              <span class="tag is-large is-white">
+                <%= if @all_cast do %>
+                  <%= metas[:vote]["size"] %>
+                <% else %>
+                  _
+                <% end %>
+              </span>
+            <% else %>
+              <span>&nbsp;</span>
+            <% end %>
+          </p>
+        </div>
+      </div>
+      <% end %>
+    </div>
+  </div>
+</div>
