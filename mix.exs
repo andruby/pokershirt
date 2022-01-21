@@ -37,6 +37,7 @@ defmodule Pokershirt.MixProject do
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.7.1"},
       {:dart_sass, "~> 0.3", runtime: Mix.env() == :dev},
+      {:bulma, "0.9.3"}, # https://kevinlang.me/bulma-phoenix-1-6/
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 3.2"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
