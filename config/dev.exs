@@ -6,6 +6,7 @@ config :pokershirt, Pokershirt.Repo,
   password: "pokershirt",
   database: "pokershirt_dev",
   hostname: "localhost",
+  stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
 

@@ -7,7 +7,6 @@ defmodule Pokershirt.MixProject do
       version: "0.1.0",
       elixir: "~> 1.12",
       elixirc_paths: elixirc_paths(Mix.env()),
-      compilers: [:gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
       aliases: aliases(),
       deps: deps()
@@ -33,10 +32,10 @@ defmodule Pokershirt.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.6.6"},
+      {:phoenix, "~> 1.6.11"},
       {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.7.1"},
-      {:dart_sass, "~> 0.3", runtime: Mix.env() == :dev},
+      {:ecto_sql, "~> 3.8.1"},
+      {:dart_sass, "~> 0.5", runtime: Mix.env() == :dev},
       {:bulma, "0.9.3"}, # https://kevinlang.me/bulma-phoenix-1-6/
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 3.2"},

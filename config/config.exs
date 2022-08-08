@@ -19,7 +19,7 @@ config :pokershirt, PokershirtWeb.Endpoint,
 
 # Configure esbuild (the version is required)
 config :esbuild,
-  version: "0.14.0",
+  version: "0.14.29",
   default: [
     args:
       ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
@@ -37,7 +37,7 @@ config :phoenix, :json_library, Jason
 
 # See https://kevinlang.me/bulma-phoenix-1-6/
 config :dart_sass,
-  version: "1.49.0",
+  version: "1.49.11",
   default: [
     args: ~w(--load-path=../deps/bulma css:../priv/static/assets),
     cd: Path.expand("../assets", __DIR__)
