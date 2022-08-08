@@ -19,6 +19,26 @@ import "./user_socket.js"
 //     import "some-package"
 //
 
+// custom hook to get/set username in browser's localstorage (via https://thepugautomatic.com/2020/05/persistent-session-data-via-localstorage-in-phoenix-liveview/)
+let Hooks = {}
+Hooks.StoreUsername = {
+  // Called when a LiveView is mounted, if it includes an element that uses this hook.
+  mounted() {
+    // Send a "restore" event to the LiveView, including the stored username.
+    // If nothing is stored yet, we'll send a `null` value.
+    this.pushEvent("username_change", {
+      username: localStorage.getItem("username"),
+    })
+
+    // `this.el` will be a form, so `this.el.username` will be the field named "username".
+    // When this field is changed, store its value.
+    this.el.addEventListener("input", e => {
+      localStorage.setItem("username", this.el.value)
+    })
+  },
+}
+
+
 // Include phoenix_html to handle method=PUT/DELETE in forms and buttons.
 import "phoenix_html"
 // Establish Phoenix Socket and LiveView configuration.
@@ -27,7 +47,10 @@ import {LiveSocket} from "phoenix_live_view"
 import topbar from "../vendor/topbar"
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}})
+let liveSocket = new LiveSocket("/live", Socket, {
+  params: {_csrf_token: csrfToken},
+  hooks: Hooks
+})
 
 // Show progress bar on live navigation and form submits
 topbar.config({barColors: {0: "#29d"}, shadowColor: "rgba(0, 0, 0, .3)"})
