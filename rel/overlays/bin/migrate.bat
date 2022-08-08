@@ -1,0 +1,1 @@
+call "%~dp0\pokershirt" eval Pokershirt.Release.migrate
