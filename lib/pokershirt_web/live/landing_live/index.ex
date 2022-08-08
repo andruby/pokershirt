@@ -5,7 +5,7 @@ defmodule PokershirtWeb.LandingLive.Index do
 
   def mount(_params, _session, socket) do
     socket2 = socket
-    |> assign(:new_room_id, "testroom")
+    |> assign(:new_room_id, Pokershirt.Haiku.room_name)
     |> assign(:total_rounds, Metric.get(Repo, :total_rounds))
     |> assign(:total_votes, Metric.get(Repo, :total_votes))
 
