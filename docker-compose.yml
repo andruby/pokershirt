@@ -1,0 +1,11 @@
+version: '3.1'
+services:
+  db:
+    image: postgres:14
+    restart: always
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_USER: pokershirt # The PostgreSQL user (useful to connect to the database)
+      POSTGRES_PASSWORD: pokershirt # The PostgreSQL password (useful to connect to the database)
+      POSTGRES_DB: pokershirt_dev # The PostgreSQL default database (automatically created at first launch)
