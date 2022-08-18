@@ -8,6 +8,7 @@ defmodule PokershirtWeb.RoomLive.Show do
   @size_options [
     {"?",  "<strong>?</strong>"},
     {"XS", "<strong>XS</strong>mall"},
+    {"S", "<strong>S</strong>mall"},
     {"M",  "<strong>M</strong>edium"},
     {"L",  "<strong>L</strong>arge"},
     {"XL", "<strong>XL</strong>arge"},
