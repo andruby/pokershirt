@@ -32,11 +32,12 @@ defmodule Pokershirt.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.6.11"},
-      {:phoenix_ecto, "~> 4.4"},
-      {:ecto_sql, "~> 3.8.1"},
+      {:phoenix, "~> 1.6.16"},
+      {:phoenix_ecto, "~> 4.5"},
+      {:ecto_sql, "~> 3.11"},
       {:dart_sass, "~> 0.5", runtime: Mix.env() == :dev},
-      {:bulma, "0.9.3"}, # https://kevinlang.me/bulma-phoenix-1-6/
+      # https://kevinlang.me/bulma-phoenix-1-6/
+      {:bulma, "0.9.3"},
       {:postgrex, ">= 0.0.0"},
       {:phoenix_html, "~> 3.2"},
       {:phoenix_live_reload, "~> 1.2", only: :dev},
