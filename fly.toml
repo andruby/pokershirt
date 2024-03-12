@@ -15,7 +15,7 @@ kill_timeout = '5s'
   release_command = '/app/bin/migrate'
 
 [env]
-  PHX_HOST = 'pokershirt.io'
+  PHX_HOST = 'pokershirt.dev'
   PORT = '8080'
 
 [[services]]
